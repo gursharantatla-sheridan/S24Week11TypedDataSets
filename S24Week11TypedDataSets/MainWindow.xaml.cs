@@ -30,7 +30,10 @@ namespace S24Week11TypedDataSets
         private void LoadProducts()
         {
             // Fill method
-            adpProducts.Fill(tblProducts);
+            //adpProducts.Fill(tblProducts);
+
+            // Get method
+            tblProducts = adpProducts.GetProducts();
 
             grdProducts.ItemsSource = tblProducts;
         }
@@ -56,6 +59,18 @@ namespace S24Week11TypedDataSets
                 txtName.Text = txtPrice.Text = txtQuantity.Text = "";
                 MessageBox.Show("Invalid ID. Please try again.");
             }
+        }
+
+        private void btnInsert_Click(object sender, RoutedEventArgs e)
+        {
+            string name = txtName.Text;
+            decimal price = decimal.Parse(txtPrice.Text);
+            short quantity = short.Parse(txtQuantity.Text);
+
+            adpProducts.Insert(name, price, quantity);
+
+            LoadProducts();
+            MessageBox.Show("New product added");
         }
     }
 }

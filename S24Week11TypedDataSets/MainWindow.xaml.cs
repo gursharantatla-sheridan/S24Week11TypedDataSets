@@ -18,9 +18,13 @@ namespace S24Week11TypedDataSets
     {
         // table adapter
         NorthwindDataSetTableAdapters.ProductsTableAdapter adpProducts = new NorthwindDataSetTableAdapters.ProductsTableAdapter();
+        NorthwindDataSetTableAdapters.CategoriesTableAdapter adpCategories = new NorthwindDataSetTableAdapters.CategoriesTableAdapter();
+        NorthwindDataSetTableAdapters.ProdsWithCatsTableAdapter adpProdsWithCats = new NorthwindDataSetTableAdapters.ProdsWithCatsTableAdapter();
 
         // data table
         NorthwindDataSet.ProductsDataTable tblProducts = new NorthwindDataSet.ProductsDataTable();
+        NorthwindDataSet.CategoriesDataTable tblCategories = new NorthwindDataSet.CategoriesDataTable();
+        NorthwindDataSet.ProdsWithCatsDataTable tblProdsWithCats = new NorthwindDataSet.ProdsWithCatsDataTable();
 
         public MainWindow()
         {
@@ -94,6 +98,34 @@ namespace S24Week11TypedDataSets
 
             LoadProducts();
             MessageBox.Show("Product deleted");
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string name = txtName.Text;
+
+            tblProducts = adpProducts.GetProductsByName(name);
+            grdProducts.ItemsSource = tblProducts;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            tblCategories = adpCategories.GetCategories();
+
+            cmbCategories.ItemsSource = tblCategories;
+            cmbCategories.DisplayMemberPath = "CategoryName";
+            cmbCategories.SelectedValuePath = "CategoryID";
+        }
+
+        private void cmbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCategories.SelectedItem != null)
+            {
+                int catId = (int)cmbCategories.SelectedValue;
+
+                tblProdsWithCats = adpProdsWithCats.GetProductsByCatId(catId);
+                grdProducts.ItemsSource = tblProdsWithCats;
+            }
         }
     }
 }

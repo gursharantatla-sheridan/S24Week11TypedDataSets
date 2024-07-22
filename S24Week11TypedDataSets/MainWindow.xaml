@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Canvas>
         <DataGrid x:Name="grdProducts" Height="356" Width="368" Canvas.Left="32" Canvas.Top="35"/>
-        <Button x:Name="btnLoadAllProducts" Content="Load All Products" Canvas.Left="434" Canvas.Top="35" Height="40" Width="187" FontSize="20" FontWeight="Bold" />
+        <Button x:Name="btnLoadAllProducts" Content="Load All Products" Canvas.Left="434" Canvas.Top="35" Height="40" Width="187" FontSize="20" FontWeight="Bold" Click="btnLoadAllProducts_Click" />
         <Label Content="ID" Canvas.Left="495" Canvas.Top="110" FontSize="20" FontWeight="Bold"/>
         <Label Content="Name" Canvas.Left="460" Canvas.Top="152" FontSize="20" FontWeight="Bold"/>
         <Label Content="Price" Canvas.Left="470" Canvas.Top="194" FontSize="20" FontWeight="Bold"/>
